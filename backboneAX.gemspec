@@ -7,7 +7,7 @@ Gem::Specification.new do |s|
   s.version     = Backboneax::VERSION
   s.authors     = ["Chris Douglas"]
   s.email       = ["dougo.chris@gmail.com"]
-  s.homepage    = ""
+  s.homepage    = "https://github.com/dougochris/backboneAX"
   s.summary     = %q{backbone Application Extensions}
   s.description = %q{backbone Application Extensions for cleaner application development}
 
