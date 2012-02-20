@@ -1,4 +1,4 @@
-class Bx.Model.Pool extends Bx.Poolable
+class Bx.ModelPool extends Bx.Poolable
   
   @_create: (name) ->
     new Backbone.Model

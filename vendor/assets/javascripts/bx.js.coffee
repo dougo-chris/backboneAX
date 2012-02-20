@@ -14,7 +14,7 @@ Bx.manageErrors = () ->
     else if (response.status == 401)       
       errorResponse = $.parseJSON(response.responseText)
       error = errorResponse.error
-      Bx.Model.Pool.get('alert').set
+      Bx.ModelPool.get('alert').set
         importance: "error"
         header: "Login Required"
         message: error  ?  "Invalid Login Details"
@@ -27,7 +27,7 @@ Bx.manageErrors = () ->
     else if (response.status == 403)
       errorResponse = $.parseJSON(response.responseText)
       error = errorResponse.error
-      Bx.Model.Pool.get('alert').set
+      Bx.ModelPool.get('alert').set
         importance: "error"
         header: "Access Denied"
         message: error ?  ""
@@ -38,7 +38,7 @@ Bx.manageErrors = () ->
       window.router.navigate('/', true)
 
     else if (response.status == 404)
-      Bx.Model.Pool.get('alert').set
+      Bx.ModelPool.get('alert').set
         importance: "error"
         header: "Server Error"
       # document.write(response.responseText)
@@ -49,7 +49,7 @@ Bx.manageErrors = () ->
 
     else if (response.status != 500)
       error = $.parseJSON(response.responseText)
-      Bx.Model.Pool.get('alert').set(error)
+      Bx.ModelPool.get('alert').set(error)
 
     else if (response.status == 500)
       document.write(response.responseText)
