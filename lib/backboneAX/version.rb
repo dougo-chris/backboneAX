@@ -1,3 +1,3 @@
-module Backboneax
-  VERSION = "0.0.1"
+module BackboneAX
+  VERSION = "0.0.2"
 end

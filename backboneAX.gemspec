@@ -4,7 +4,7 @@ require "backboneAX/version"
 
 Gem::Specification.new do |s|
   s.name        = "backboneAX"
-  s.version     = Backboneax::VERSION
+  s.version     = BackboneAX::VERSION
   s.authors     = ["Chris Douglas"]
   s.email       = ["dougo.chris@gmail.com"]
   s.homepage    = "https://github.com/dougochris/backboneAX"

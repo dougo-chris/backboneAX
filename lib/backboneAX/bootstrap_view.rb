@@ -86,20 +86,6 @@ module BackboneAX
       end
     end
 
-    def bx_field_switch(label, field_id, options = {})
-      capture_haml do
-        haml_tag(:div, options.merge({class: 'switch', id: field_id})) do
-          haml_tag(:div, {class: 'cb-enable'}) do 
-            haml_tag(:span, 'On')
-          end
-          haml_tag(:div, {class: 'cb-disable'}) do 
-            haml_tag(:span, 'Off')
-          end
-          haml_tag(:input, options.merge({class: 'hide', type: 'checkbox', id: field_id}))        
-        end
-      end
-    end
-
     #BUTTONS
     def bx_btn(title, field_id, options = {})
       capture_haml do
@@ -178,20 +164,6 @@ module BackboneAX
           items.each do |key, value|
             haml_tag(:option, value, {value: key})
           end
-        end
-      end
-    end
-
-    def bx_cg_switch(label, field_id, options = {})
-      bx_cg_group(label, field_id, options) do
-        haml_tag(:div, options.merge({class: 'switch', id: field_id})) do
-          haml_tag(:div, {class: 'cb-enable'}) do 
-            haml_tag(:span, 'On')
-          end
-          haml_tag(:div, {class: 'cb-disable'}) do 
-            haml_tag(:span, 'Off')
-          end
-          haml_tag(:input, options.merge({class: 'hide', type: 'checkbox', id: field_id}))        
         end
       end
     end
