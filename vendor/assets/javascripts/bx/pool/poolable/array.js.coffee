@@ -1,4 +1,4 @@
-class Bx.ArrayPool extends Bx.Poolable
+class Bx.Pool.Array extends Bx.Pool.Base
   
   @_create: (name) ->
     []

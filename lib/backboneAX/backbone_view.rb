@@ -1,5 +1,5 @@
 module BackboneAX
-  module BootstrapView
+  module BackboneView
   
     def bx_breadcrumbs(links, button = nil)
       content_tag(:ul, '', {class: 'breadcrumb'}) do
@@ -86,6 +86,12 @@ module BackboneAX
       end
     end
 
+    def bx_field_password(field_id, options = {})
+      capture_haml do
+        haml_tag(:input, options.slice(:class, :rows).merge({id: field_id, type: 'password'}))
+      end
+    end
+
     #BUTTONS
     def bx_btn(title, field_id, options = {})
       capture_haml do
@@ -165,6 +171,12 @@ module BackboneAX
             haml_tag(:option, value, {value: key})
           end
         end
+      end
+    end
+
+    def bx_cg_password(label, field_id, options = {})
+      bx_cg_group(label, field_id, options) do
+        haml_tag(:input, options.slice(:class, :rows).merge({id: field_id, type: 'password'}))
       end
     end
 

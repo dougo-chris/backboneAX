@@ -2,6 +2,7 @@
 #= require_tree ./bx
 
 window.Bx =
+  Pool: {}
   Model: {}
   Collection: {}
   Router: {}
@@ -14,7 +15,7 @@ Bx.manageErrors = () ->
     else if (response.status == 401)       
       errorResponse = $.parseJSON(response.responseText)
       error = errorResponse.error
-      Bx.ModelPool.get('alert').set
+      Bx.Pool.Model.get('alert').set
         importance: "error"
         header: "Login Required"
         message: error  ?  "Invalid Login Details"
@@ -22,12 +23,12 @@ Bx.manageErrors = () ->
           email: ""
           password: ""
         }
-      window.router.navigate('/login', true)
+      window.router.navigate('BX_LOGIN_REQUIRED', true)
       
     else if (response.status == 403)
       errorResponse = $.parseJSON(response.responseText)
       error = errorResponse.error
-      Bx.ModelPool.get('alert').set
+      Bx.Pool.Model.get('alert').set
         importance: "error"
         header: "Access Denied"
         message: error ?  ""
@@ -35,10 +36,10 @@ Bx.manageErrors = () ->
           email: ""
           password: ""
         }
-      window.router.navigate('/', true)
+      window.router.navigate('BX_ACCESS_DENIED', true)
 
     else if (response.status == 404)
-      Bx.ModelPool.get('alert').set
+      Bx.Pool.Model.get('alert').set
         importance: "error"
         header: "Server Error"
       # document.write(response.responseText)
@@ -49,7 +50,7 @@ Bx.manageErrors = () ->
 
     else if (response.status != 500)
       error = $.parseJSON(response.responseText)
-      Bx.ModelPool.get('alert').set(error)
+      Bx.Pool.Model.get('alert').set(error)
 
     else if (response.status == 500)
       document.write(response.responseText)

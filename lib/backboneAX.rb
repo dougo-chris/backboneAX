@@ -6,7 +6,7 @@ if defined? Rails
   end
 end
 
-require "backboneAX/bootstrap_view"
+require "backboneAX/backbone_view"
 module Sprockets::Helpers::RailsHelper
-  include BackboneAX::BootstrapView
+  include BackboneAX::BackboneView
 end

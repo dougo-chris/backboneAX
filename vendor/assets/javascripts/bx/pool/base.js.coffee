@@ -1,4 +1,4 @@
-class Bx.Poolable
+class Bx.Pool.Base
   @reset: (name) ->
     return unless @_data?
     if name? 

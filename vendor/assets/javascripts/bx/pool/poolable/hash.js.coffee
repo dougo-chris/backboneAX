@@ -1,4 +1,4 @@
-class Bx.HashPool extends Bx.Poolable
+class Bx.Pool.Hash extends Bx.Pool.Base
   
   @_create: (name) ->
     {}
