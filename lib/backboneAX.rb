@@ -5,8 +5,3 @@ if defined? Rails
     require "backboneAX/engine"    
   end
 end
-
-require "backboneAX/backbone_view"
-module Sprockets::Helpers::RailsHelper
-  include BackboneAX::BackboneView
-end
