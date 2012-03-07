@@ -55,29 +55,31 @@ class Bx.View.Base extends Backbone.View
             @setTemplateImg($.trim(setdata[0]), model, $scope, $field)
           when  "href"
             @setTemplateHref($.trim(setdata[0]), model, $scope, $field)      
+          when  "data"
+            @setTemplateData($.trim(setdata[0]), model, $scope, $field)      
           else
             @setTemplateText($.trim(setdata[0]), model, $scope, $field)
 
-  setTemplateId: (fieldName, model, $scope, $field) ->
-    value = if @_isModel(model) then model.get(fieldName) else model
+  setTemplateId: (fieldName, modelOrValue, $scope, $field) ->
+    value = if @_isModel(modelOrValue) then modelOrValue.get(fieldName) else modelOrValue
     field = if $field? then $field else if $scope? then $("##{fieldName}", $scope) else @$("##{fieldName}")
  
     field.attr(id, value)
     
-  setTemplateText: (fieldName, model, $scope, $field) ->
-    value = if @_isModel(model) then model.get(fieldName) else model
+  setTemplateText: (fieldName, modelOrValue, $scope, $field) ->
+    value = if @_isModel(modelOrValue) then modelOrValue.get(fieldName) else modelOrValue
     field = if $field? then $field else if $scope? then $("##{fieldName}", $scope) else @$("##{fieldName}")
  
     field.html(value)
 
-  setTemplateDate: (fieldName, model, $scope, $field) ->
+  setTemplateDate: (fieldName, modelOrValue, $scope, $field) ->
     value = if @_isModel(model) then model.getDate(fieldName) else model
     field = if $field? then $field else if $scope? then $("##{fieldName}", $scope) else @$("##{fieldName}")
  
     field.html(value)
 
-  setTemplateBool: (fieldName, model, $scope, $field) ->
-    value = if @_isModel(model) then model.get(fieldName) else model
+  setTemplateBool: (fieldName, modelOrValue, $scope, $field) ->
+    value = if @_isModel(modelOrValue) then modelOrValue.get(fieldName) else modelOrValue
     field = if $field? then $field else if $scope? then $("##{fieldName}", $scope) else @$("##{fieldName}")
         
     if value == true 
@@ -85,8 +87,8 @@ class Bx.View.Base extends Backbone.View
     else
       field.addClass('falsy').removeClass('truthy')
 
-  setTemplateArray: (fieldName, model, $scope, $field) ->
-    values = if @_isModel(model) then model.get(fieldName) else model
+  setTemplateArray: (fieldName, modelOrValue, $scope, $field) ->
+    values = if @_isModel(modelOrValue) then modelOrValue.get(fieldName) else modelOrValue
     field = if $field? then $field else if $scope? then $("##{fieldName}", $scope) else @$("##{fieldName}")
  
     result = ""
@@ -97,8 +99,8 @@ class Bx.View.Base extends Backbone.View
       
     field.html(result)
     
-  setTemplateShow: (fieldName, model, $scope, $field) ->
-    value = if @_isModel(model) then model.get(fieldName) else model
+  setTemplateShow: (fieldName, modelOrValue, $scope, $field) ->
+    value = if @_isModel(modelOrValue) then modelOrValue.get(fieldName) else modelOrValue
     field = if $field? then $field else if $scope? then $("##{fieldName}", $scope) else @$("##{fieldName}")
     
     field.toggle(value == true)
@@ -107,8 +109,8 @@ class Bx.View.Base extends Backbone.View
     else
       field.addClass('hide')
 
-  setTemplateHide: (fieldName, model, $scope, $field) ->
-    value = if @_isModel(model) then model.get(fieldName) else model
+  setTemplateHide: (fieldName, modelOrValue, $scope, $field) ->
+    value = if @_isModel(modelOrValue) then modelOrValue.get(fieldName) else modelOrValue
     field = if $field? then $field else if $scope? then $("##{fieldName}", $scope) else @$("##{fieldName}")
     
     field.toggle(value != true)
@@ -117,26 +119,32 @@ class Bx.View.Base extends Backbone.View
     else
       field.removeClass('hide')
        
-  setTemplateImg: (fieldName, model, $scope, $field) ->
-    value = if @_isModel(model) then model.get(fieldName) else model
+  setTemplateImg: (fieldName, modelOrValue, $scope, $field) ->
+    value = if @_isModel(modelOrValue) then modelOrValue.get(fieldName) else modelOrValue
     field = if $field? then $field else if $scope? then $("##{fieldName}", $scope) else @$("##{fieldName}")
  
     field.attr('src', value)
 
-  setTemplateHref: (fieldName, model, $scope, $field) ->
+  setTemplateHref: (fieldName, modelOrValue, $scope, $field) ->
     value = if @_isModel(model) then model.get('id') else model
     field = if $field? then $field else if $scope? then $("##{fieldName}", $scope) else @$("##{fieldName}")
      
-    field.attr('href', "##{value}")
+    field.attr('href', value)
+
+  setTemplateData: (fieldName, modelOrValue, $scope, $field) ->
+    value = if @_isModel(model) then model.get('id') else model
+    field = if $field? then $field else if $scope? then $("##{fieldName}", $scope) else @$("##{fieldName}")
+     
+    field.data(fieldName, value)
 
 # SET & GET FORM FIELDS
-  formSetText: (fieldName, model) ->
-    value = if @_isModel(model) then model.get(fieldName) else model
+  formSetText: (fieldName, modelOrValue) ->
+    value = if @_isModel(modelOrValue) then modelOrValue.get(fieldName) else modelOrValue
     field = @$("##{fieldName}")
  
     field.attr('value', value)
 
-  formGetText: (fieldName, model) ->
+  formGetText: (fieldName, modelOrValue) ->
     field = @$("##{fieldName}")
     value =  field.attr('value')
     
@@ -146,20 +154,14 @@ class Bx.View.Base extends Backbone.View
       model.set(options, {silent: true})
     return value
 
-  formSetDate: (fieldName, model) ->
-    value = if @_isModel(model) then model.getDate(fieldName) else model
-    field = @$("##{fieldName}")
- 
-    field.attr('value', value)    
-
-  formSetSelect: (fieldName, model) ->
-    value = if @_isModel(model) then model.get(fieldName) else model
+  formSetSelect: (fieldName, modelOrValue) ->
+    value = if @_isModel(modelOrValue) then modelOrValue.get(fieldName) else modelOrValue
     field = @$("##{fieldName}")
     
     field.find("option").removeAttr('selected')
     field.find("option[value='#{value}']").attr('selected', true)
         
-  formGetSelect: (fieldName, model) ->
+  formGetSelect: (fieldName, modelOrValue) ->
     field = @$("##{fieldName}")    
     value = field.find('option:selected').val()
 
@@ -169,8 +171,8 @@ class Bx.View.Base extends Backbone.View
       model.set(options, {silent: true})
     return value
     
-  formSetSelectMultiple: (fieldName, model) ->
-    values = if @_isModel(model) then model.get(fieldName) else model
+  formSetSelectMultiple: (fieldName, modelOrValue) ->
+    values = if @_isModel(modelOrValue) then modelOrValue.get(fieldName) else modelOrValue
     field = @$("##{fieldName}")
     
     field.find("option").removeAttr('selected')
@@ -178,7 +180,7 @@ class Bx.View.Base extends Backbone.View
       _.each values, (value) ->
         field.find("option[value='#{value}']").attr('selected', true)
         
-  formGetSelectMultiple: (fieldName, model) ->
+  formGetSelectMultiple: (fieldName, modelOrValue) ->
     field = @$("##{fieldName}")
     
     values = []
@@ -192,8 +194,8 @@ class Bx.View.Base extends Backbone.View
       model.set(options, {silent: true})
     return values
 
-  formSetCheckbox: (fieldName, model) ->
-    value = if @_isModel(model) then model.get(fieldName) else model
+  formSetCheckbox: (fieldName, modelOrValue) ->
+    value = if @_isModel(modelOrValue) then modelOrValue.get(fieldName) else modelOrValue
     field = @$("##{fieldName}")
     
     if value == true
@@ -201,7 +203,7 @@ class Bx.View.Base extends Backbone.View
     else
       field.removeAttr('checked')    
         
-  formGetCheckbox: (fieldName, model) ->
+  formGetCheckbox: (fieldName, modelOrValue) ->
     field = @$("##{fieldName}")    
     value = field.is(':checked')
 
