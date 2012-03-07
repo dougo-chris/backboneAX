@@ -144,7 +144,7 @@ class Bx.View.Base extends Backbone.View
  
     field.attr('value', value)
 
-  formGetText: (fieldName, modelOrValue) ->
+  formGetText: (fieldName, model) ->
     field = @$("##{fieldName}")
     value =  field.attr('value')
     
@@ -154,6 +154,22 @@ class Bx.View.Base extends Backbone.View
       model.set(options, {silent: true})
     return value
 
+  formSetDate: (fieldName, modelOrValue) ->
+    value = if @_isModel(modelOrValue) then modelOrValue.getDate(fieldName) else modelOrValue
+    field = @$("##{fieldName}")
+    
+    field.attr('value', value)    
+
+  formGetDate: (fieldName, model) ->
+    field = @$("##{fieldName}")
+    value =  field.attr('value')
+    
+    if model?
+      options = {}
+      options[fieldName] = value    
+      model.set(options, {silent: true})
+    return value
+    
   formSetSelect: (fieldName, modelOrValue) ->
     value = if @_isModel(modelOrValue) then modelOrValue.get(fieldName) else modelOrValue
     field = @$("##{fieldName}")
@@ -161,7 +177,7 @@ class Bx.View.Base extends Backbone.View
     field.find("option").removeAttr('selected')
     field.find("option[value='#{value}']").attr('selected', true)
         
-  formGetSelect: (fieldName, modelOrValue) ->
+  formGetSelect: (fieldName, model) ->
     field = @$("##{fieldName}")    
     value = field.find('option:selected').val()
 
@@ -180,7 +196,7 @@ class Bx.View.Base extends Backbone.View
       _.each values, (value) ->
         field.find("option[value='#{value}']").attr('selected', true)
         
-  formGetSelectMultiple: (fieldName, modelOrValue) ->
+  formGetSelectMultiple: (fieldName, model) ->
     field = @$("##{fieldName}")
     
     values = []
@@ -203,7 +219,7 @@ class Bx.View.Base extends Backbone.View
     else
       field.removeAttr('checked')    
         
-  formGetCheckbox: (fieldName, modelOrValue) ->
+  formGetCheckbox: (fieldName, model) ->
     field = @$("##{fieldName}")    
     value = field.is(':checked')
 
