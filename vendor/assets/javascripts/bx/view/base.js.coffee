@@ -73,7 +73,7 @@ class Bx.View.Base extends Backbone.View
     field.html(value)
 
   setTemplateDate: (fieldName, modelOrValue, $scope, $field) ->
-    value = if @_isModel(model) then model.getDate(fieldName) else model
+    value = if @_isModel(modelOrValue) then modelOrValue.getDate(fieldName) else model
     field = if $field? then $field else if $scope? then $("##{fieldName}", $scope) else @$("##{fieldName}")
  
     field.html(value)
@@ -126,16 +126,16 @@ class Bx.View.Base extends Backbone.View
     field.attr('src', value)
 
   setTemplateHref: (fieldName, modelOrValue, $scope, $field) ->
-    value = if @_isModel(model) then model.get('id') else model
+    value = if @_isModel(modelOrValue) then modelOrValue.get('id') else modelOrValue
     field = if $field? then $field else if $scope? then $("##{fieldName}", $scope) else @$("##{fieldName}")
      
     field.attr('href', value)
 
   setTemplateData: (fieldName, modelOrValue, $scope, $field) ->
-    value = if @_isModel(model) then model.get('id') else model
+    value = if @_isModel(modelOrValue) then modelOrValue.get('id') else modelOrValue
     field = if $field? then $field else if $scope? then $("##{fieldName}", $scope) else @$("##{fieldName}")
      
-    field.data(fieldName, value)
+    field.attr("data-#{fieldName}", value)
 
 # SET & GET FORM FIELDS
   formSetText: (fieldName, modelOrValue) ->
