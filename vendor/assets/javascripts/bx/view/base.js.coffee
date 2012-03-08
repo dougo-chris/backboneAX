@@ -126,13 +126,13 @@ class Bx.View.Base extends Backbone.View
     field.attr('src', value)
 
   setTemplateHref: (fieldName, modelOrValue, $scope, $field) ->
-    value = if @_isModel(modelOrValue) then modelOrValue.get('id') else modelOrValue
+    value = if @_isModel(modelOrValue) then modelOrValue.get(fieldName) else modelOrValue
     field = if $field? then $field else if $scope? then $("##{fieldName}", $scope) else @$("##{fieldName}")
      
     field.attr('href', value)
 
   setTemplateData: (fieldName, modelOrValue, $scope, $field) ->
-    value = if @_isModel(modelOrValue) then modelOrValue.get('id') else modelOrValue
+    value = if @_isModel(modelOrValue) then modelOrValue.get(fieldName) else modelOrValue
     field = if $field? then $field else if $scope? then $("##{fieldName}", $scope) else @$("##{fieldName}")
      
     field.attr("data-#{fieldName}", value)
