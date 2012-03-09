@@ -61,6 +61,8 @@ class Bx.Model.Base extends Backbone.Model
         value
       when "dateLong"
         Date.parseExact(value, "yyyyMMddHHmm").toString("dddd MMMM d, yyyy")
+      when "dateUSA"
+        Date.parseExact(value, "yyyyMMddHHmm").toString("MM/dd/yyyy")
       when "date"
         Date.parseExact(value, "yyyyMMddHHmm").toString("d MMM yy")
       when "timeLong"

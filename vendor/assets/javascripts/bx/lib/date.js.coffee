@@ -1,5 +1,5 @@
 $.dateRawNow = ()->
-  jQuery.dateRawFormat(Date.today())
+  $.dateRawFormat(Date.today())
 
 $.dateRawFormat = (date)->
   return null unless date?  
