@@ -5,7 +5,7 @@ $.dateRawFormat = (date)->
   return null unless date?  
   date.toString("yyyyMMddHHmm")
 
-$.dateFormatRaw = (value)->
+$.dateFormatRaw = (value, format)->
   return null unless value?
   switch format
     when "raw"
