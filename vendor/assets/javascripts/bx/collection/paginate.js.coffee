@@ -1,7 +1,7 @@
 class Bx.Collection.Paginate extends Bx.Collection.Base
 
-  constructor: (options = {}) ->
-    super(options)
+  constructor: (models, options = {}) ->
+    super(models, options)
     @pageSize = options.pageSize ? 10
     @pageCurrent = options.pageCurrent ? 0
     @pageTotal = options.pageTotal ? 1

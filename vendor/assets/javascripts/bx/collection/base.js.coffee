@@ -1,8 +1,8 @@
 class Bx.Collection.Base extends Backbone.Collection
 
-  constructor: (options = {}) ->
-    super(options)
-    @models = []
+  constructor: (models, options = {}) ->
+    super(models, options)
+    # @models = []
     @fetchCalled = false
   
   fetch: (options = {}) ->
