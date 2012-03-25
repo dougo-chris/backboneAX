@@ -138,65 +138,65 @@ class Bx.View.Base extends Backbone.View
     field.attr("data-#{fieldName}", value)
 
 # SET & GET FORM FIELDS
-  formSetText: (fieldName, modelOrValue) ->
-    value = if @_isModel(modelOrValue) then modelOrValue.get(fieldName) else modelOrValue
+  formSetText: (fieldName, modelOrValue, attrName) ->
     field = @$("##{fieldName}")
+    value = if @_isModel(modelOrValue) then modelOrValue.get(attrName ? fieldName) else modelOrValue
  
     field.attr('value', value)
 
-  formGetText: (fieldName, model) ->
+  formGetText: (fieldName, model, attrName) ->
     field = @$("##{fieldName}")
     value =  field.attr('value')
     
     if model?
       options = {}
-      options[fieldName] = value    
+      options[attrName ? fieldName] = value    
       model.set(options, {silent: true})
     return value
 
-  formSetDate: (fieldName, modelOrValue) ->
-    value = if @_isModel(modelOrValue) then modelOrValue.getDate(fieldName) else modelOrValue
+  formSetDate: (fieldName, modelOrValue, attrName) ->
     field = @$("##{fieldName}")
+    value = if @_isModel(modelOrValue) then modelOrValue.getDate(attrName ? fieldName) else modelOrValue
     
     field.attr('value', value)    
 
-  formGetDate: (fieldName, model) ->
+  formGetDate: (fieldName, model, attrName) ->
     field = @$("##{fieldName}")
     value =  field.attr('value')
     
     if model?
       options = {}
-      options[fieldName] = value    
+      options[attrName ? fieldName] = value    
       model.set(options, {silent: true})
     return value
     
-  formSetSelect: (fieldName, modelOrValue) ->
-    value = if @_isModel(modelOrValue) then modelOrValue.get(fieldName) else modelOrValue
+  formSetSelect: (fieldName, modelOrValue, attrName) ->
     field = @$("##{fieldName}")
+    value = if @_isModel(modelOrValue) then modelOrValue.get(attrName ? fieldName) else modelOrValue
     
     field.find("option").removeAttr('selected')
     field.find("option[value='#{value}']").attr('selected', true)
         
-  formGetSelect: (fieldName, model) ->
-    field = @$("##{fieldName}")    
+  formGetSelect: (fieldName, model, attrName) ->
+    field = @$("##{fieldName}")
     value = field.find('option:selected').val()
 
     if model?
       options = {}
-      options[fieldName] = value    
+      options[attrName ? fieldName] = value    
       model.set(options, {silent: true})
     return value
     
-  formSetSelectMultiple: (fieldName, modelOrValue) ->
-    values = if @_isModel(modelOrValue) then modelOrValue.get(fieldName) else modelOrValue
+  formSetSelectMultiple: (fieldName, modelOrValue, attrName) ->
     field = @$("##{fieldName}")
+    values = if @_isModel(modelOrValue) then modelOrValue.get(attrName ? fieldName) else modelOrValue    
     
     field.find("option").removeAttr('selected')
     if values?
       _.each values, (value) ->
         field.find("option[value='#{value}']").attr('selected', true)
         
-  formGetSelectMultiple: (fieldName, model) ->
+  formGetSelectMultiple: (fieldName, model, attrName) ->
     field = @$("##{fieldName}")
     
     values = []
@@ -206,30 +206,29 @@ class Bx.View.Base extends Backbone.View
 
     if model?
       options = {}
-      options[fieldName] = values    
+      options[attrName ? fieldName] = values    
       model.set(options, {silent: true})
     return values
 
-  formSetCheckbox: (fieldName, modelOrValue) ->
-    value = if @_isModel(modelOrValue) then modelOrValue.get(fieldName) else modelOrValue
+  formSetCheckbox: (fieldName, modelOrValue, attrName) ->
     field = @$("##{fieldName}")
+    value = if @_isModel(modelOrValue) then modelOrValue.get(attrName ? fieldName) else modelOrValue
     
     if value == true
       field.attr('checked', true)
     else
       field.removeAttr('checked')    
         
-  formGetCheckbox: (fieldName, model) ->
-    field = @$("##{fieldName}")    
+  formGetCheckbox: (fieldName, model, attrName) ->
+    field = @$("##{fieldName}")
     value = field.is(':checked')
 
     if model?
       options = {}
-      options[fieldName] = value  
+      options[attrName ? fieldName] = value  
       model.set(options, {silent: true})    
     return value
 
 # MODEL OR VALUE
   _isModel: (model) ->
     model? && typeof(model) == 'object'
-            
