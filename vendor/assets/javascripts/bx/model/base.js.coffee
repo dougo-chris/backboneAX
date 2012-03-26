@@ -47,7 +47,7 @@ class Bx.Model.Base extends Backbone.Model
 
   _connState: (state = "") ->
     @_conn_state = state
-    @trigger("change:connection")    
+    @trigger("change:connection", @)    
   
   isConnected: () ->
     @_conn_state == "connected"
