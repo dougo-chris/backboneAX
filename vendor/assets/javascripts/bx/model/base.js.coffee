@@ -53,4 +53,4 @@ class Bx.Model.Base extends Backbone.Model
     @_conn_state == "connected"
 
   getDate: (attr, format = null) ->
-    $.dateFormatRaw(@get(attr))
+    $.dateFormatRaw(@get(attr), format)
