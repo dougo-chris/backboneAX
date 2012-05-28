@@ -7,7 +7,7 @@ class Bx.Collection.Paginate extends Bx.Collection.Base
     @pageTotal = options.pageTotal ? 1
     @current = options.current ? null
     
-  parse: (response)  ->
+  parse: (response) ->
     @pageCurrent = if response.pagination then response.pagination.current ? 1 else 1
     @pageTotal = if response.pagination then response.pagination.total ? 1 else 1
     response.items || []
