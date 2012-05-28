@@ -1,5 +1,9 @@
 class Bx.Model.Base extends Backbone.Model
-
+  constructor: (attributes) ->
+    super(attributes)      
+    # allow overriding of the "contructed" method
+    @constructed(attributes) if @constructed?
+  
   fetch: (options = {}) ->
     @_connState("connected")
     
