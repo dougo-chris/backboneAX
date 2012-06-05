@@ -1,6 +1,6 @@
 class Bx.Model.Base extends Backbone.Model
-  constructor: (attributes) ->
-    super(attributes)      
+  constructor: (attributes, options) ->
+    super(attributes, options)      
     # allow overriding of the "contructed" method
     @constructed(attributes) if @constructed?
   
