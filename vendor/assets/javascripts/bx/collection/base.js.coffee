@@ -27,7 +27,7 @@ class Bx.Collection.Base extends Backbone.Collection
     
   _connState: (state = "") ->
     @_conn_state = state
-    @trigger("change:connection")    
+    @trigger("connection")    
   
   isConnected: ()->
     @_conn_state == "connected"
