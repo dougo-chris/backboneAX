@@ -27,22 +27,6 @@ class Bx.View.Base extends Backbone.View
       model.set(options, {silent: true})
     return value
 
-  formSetDate: (fieldName, modelOrValue, attrName) ->
-    field = @$("##{fieldName}")
-    value = if @_isModel(modelOrValue) then modelOrValue.getDate(attrName ? fieldName) else modelOrValue
-    
-    field.attr('value', value)    
-
-  formGetDate: (fieldName, model, attrName) ->
-    field = @$("##{fieldName}")
-    value =  Date.parseExact(field.attr('value'), 'd MMM yyyy') 
-    
-    if model?
-      options = {}
-      options[attrName ? fieldName] = $.dateRawFormat(value)
-      model.set(options, {silent: true})
-    return value
-    
   formSetSelect: (fieldName, modelOrValue, attrName) ->
     field = @$("##{fieldName}")
     value = if @_isModel(modelOrValue) then modelOrValue.get(attrName ? fieldName) else modelOrValue

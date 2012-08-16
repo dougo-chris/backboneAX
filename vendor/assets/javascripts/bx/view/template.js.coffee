@@ -13,8 +13,6 @@ $.extend Backbone.View.prototype,
             @setTemplateId($.trim(setdata[0]), model, $scope, $field)
           when "text"
             @setTemplateText($.trim(setdata[0]), model, $scope, $field)
-          when "date"
-            @setTemplateDate($.trim(setdata[0]), model, $scope, $field)
           when "bool"
             @setTemplateBool($.trim(setdata[0]), model, $scope, $field)
           when "array"
@@ -30,7 +28,7 @@ $.extend Backbone.View.prototype,
           when  "data"
             @setTemplateData($.trim(setdata[0]), model, $scope, $field)      
           else
-            @setTemplateText($.trim(setdata[0]), model, $scope, $field)
+            @setTemplateOther?($.trim(setdata[1]), $.trim(setdata[0]), model, $scope, $field)
 
   setTemplateId: (fieldName, modelOrValue, $scope, $field) ->
     value = if @_isModel(modelOrValue) then modelOrValue.get(fieldName) else modelOrValue
@@ -40,12 +38,6 @@ $.extend Backbone.View.prototype,
     
   setTemplateText: (fieldName, modelOrValue, $scope, $field) ->
     value = if @_isModel(modelOrValue) then modelOrValue.get(fieldName) else modelOrValue
-    field = if $field? then $field else if $scope? then $("##{fieldName}", $scope) else @$("##{fieldName}")
- 
-    field.html(value)
-
-  setTemplateDate: (fieldName, modelOrValue, $scope, $field) ->
-    value = if @_isModel(modelOrValue) then modelOrValue.getDate(fieldName) else model
     field = if $field? then $field else if $scope? then $("##{fieldName}", $scope) else @$("##{fieldName}")
  
     field.html(value)
