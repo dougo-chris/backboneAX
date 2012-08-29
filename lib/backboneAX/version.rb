@@ -1,3 +1,3 @@
 module BackboneAX
-  VERSION = "0.0.17.rc02"
+  VERSION = "0.0.17.rc03"
 end
