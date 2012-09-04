@@ -14,7 +14,7 @@ class Bx.Model.Base extends Backbone.Model
 
     optionsError = options.error
     options.error = (model, response) =>
-      @_connState()
+      @_connState("error")
       optionsError(model, response) if optionsError
       
     super(options)
@@ -29,7 +29,7 @@ class Bx.Model.Base extends Backbone.Model
 
     optionsError = options.error
     options.error = (model, response) =>
-      @_connState()
+      @_connState("error")
       optionsError(model, response) if optionsError      
       
     super(attr, options)
@@ -44,7 +44,7 @@ class Bx.Model.Base extends Backbone.Model
 
     optionsError = options.error
     options.error = (model, response) =>
-      @_connState()
+      @_connState("error")
       optionsError(model, response) if optionsError
       
     super(options)
@@ -52,6 +52,9 @@ class Bx.Model.Base extends Backbone.Model
   _connState: (state = "") ->
     @_conn_state = state
     @trigger("connection", @)    
+
+  isError: ()->
+    @_conn_state == "error"
   
   isConnected: () ->
     @_conn_state == "connected"

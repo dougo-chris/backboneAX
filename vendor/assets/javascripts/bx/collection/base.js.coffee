@@ -16,7 +16,7 @@ class Bx.Collection.Base extends Backbone.Collection
 
     optionsError = options.error
     options.error = (collection, response) =>
-      @_connState()
+      @_connState("error")
       optionsError(collection, response) if optionsError
     
     super(options)
@@ -31,6 +31,9 @@ class Bx.Collection.Base extends Backbone.Collection
   
   isConnected: ()->
     @_conn_state == "connected"
+
+  isError: ()->
+    @_conn_state == "error"
 
   isFetched: ()->
     @fetchCalled && !@isConnected()
