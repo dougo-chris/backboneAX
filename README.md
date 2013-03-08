@@ -8,9 +8,9 @@ This is a set of backbone extensions that have help make my backbone projects ea
 
 Extends the Backbone.Model class to let me know the connection state of the class
 
-### Bx.Collection.Base  
+### Bx.Collection.Base
 
-- Extends the Backbone.Collection class to let me know the connection state of the class. 
+- Extends the Backbone.Collection class to let me know the connection state of the class.
 - Supports fetchOnce which will not retry a fetch if one has already been called
 
 
@@ -18,9 +18,9 @@ Extends the Backbone.Model class to let me know the connection state of the clas
 
 - Pagination.
 
-### Bx.View.Base  
+### Bx.View.Base
 
-- Manages child view creation and releasing. 
+- Manages child view creation and releasing.
 - Setting data from models to views of templates
 - Setting and getting of form data
 
@@ -29,4 +29,4 @@ Extends the Backbone.Model class to let me know the connection state of the clas
 - Bx.Pool.Hash
 - Bx.Pool.Array
 - Bx.Pool.Model
-- Bx.Pool.Collection 
+- Bx.Pool.Collection

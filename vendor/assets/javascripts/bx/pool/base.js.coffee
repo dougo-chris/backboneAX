@@ -1,7 +1,7 @@
 class Bx.Pool.Base
   @reset: (name) ->
     return unless @_data?
-    if name? 
+    if name?
       @_data[name] = null
     else
       @_data = {}
@@ -15,7 +15,7 @@ class Bx.Pool.Base
     if !@_data[name]? || reset
       @_data[name] = @_create(name)
     @_data[name]
-    
+
   @_create: (name) ->
     "should be overridden"
-  
+

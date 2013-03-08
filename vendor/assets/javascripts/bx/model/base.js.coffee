@@ -1,12 +1,12 @@
 class Bx.Model.Base extends Backbone.Model
   constructor: (attributes, options) ->
-    super(attributes, options)      
+    super(attributes, options)
     # allow overriding of the "contructed" method
     @constructed(attributes) if @constructed?
-  
+
   fetch: (options = {}) ->
     @_connState("connected")
-    
+
     optionsSuccess = options.success
     options.success = (model, response) =>
       @_connState()
@@ -16,12 +16,12 @@ class Bx.Model.Base extends Backbone.Model
     options.error = (model, response) =>
       @_connState("error")
       optionsError(model, response) if optionsError
-      
+
     super(options)
 
   save: (attr, options = {}) ->
     @_connState("connected")
-    
+
     optionsSuccess = options.success
     options.success = (model, response) =>
       @_connState()
@@ -30,8 +30,8 @@ class Bx.Model.Base extends Backbone.Model
     optionsError = options.error
     options.error = (model, response) =>
       @_connState("error")
-      optionsError(model, response) if optionsError      
-      
+      optionsError(model, response) if optionsError
+
     super(attr, options)
 
   destroy: (options = {}) ->
@@ -46,16 +46,16 @@ class Bx.Model.Base extends Backbone.Model
     options.error = (model, response) =>
       @_connState("error")
       optionsError(model, response) if optionsError
-      
+
     super(options)
 
   _connState: (state = "") ->
     @_conn_state = state
-    @trigger("connection", @)    
+    @trigger("connection", @)
 
   isError: ()->
     @_conn_state == "error"
-  
+
   isConnected: () ->
     @_conn_state == "connected"
-    
+

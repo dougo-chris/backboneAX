@@ -6,12 +6,12 @@ class Bx.Collection.Paginate extends Bx.Collection.Base
     @pageCurrent = options.pageCurrent ? 0
     @pageTotal = options.pageTotal ? 1
     @current = options.current ? null
-    
+
   parse: (response) ->
     @pageCurrent = if response.pagination then response.pagination.current ? 1 else 1
     @pageTotal = if response.pagination then response.pagination.total ? 1 else 1
     response.items || []
-  
+
   fetch: (options = {}) ->
     options.data =  $.extend(options.data || {}, {page: @pageCurrent, pageSize: @pageSize})
 
@@ -21,12 +21,12 @@ class Bx.Collection.Paginate extends Bx.Collection.Base
         first = collection.first()
         @currentSet(first.id) if first?
         optionsSuccess(collection, response) if optionsSuccess
-    
+
     super(options)
 
 # RESTART THE SEARCH
    restart: (options = {}) ->
-    options.add = false    
+    options.add = false
     @pageCurrent = 1
     @fetch(options)
 
@@ -62,7 +62,7 @@ class Bx.Collection.Paginate extends Bx.Collection.Base
     if @current? && @current.id != parseInt(id, 10)
       @current.set({id: id}, {silent: true})
       @current.fetch();
-      
+
   currentPrev: () ->
     return unless @current?
     index = @indexOf(@current.id)
@@ -81,9 +81,9 @@ class Bx.Collection.Paginate extends Bx.Collection.Base
       @currentSet(@at(index + 1).id)
     else
       @more()
-      
+
   hasCurrentNext: () ->
     return false unless @current?
     index = @indexOf(@current.id)
     return (index < @size - 1) || @hasMore()
-    
+

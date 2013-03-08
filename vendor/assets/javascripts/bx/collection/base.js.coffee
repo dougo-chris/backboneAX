@@ -4,9 +4,9 @@ class Bx.Collection.Base extends Backbone.Collection
     super(models, options)
     # @models = []
     @fetchCalled = false
-  
+
   fetch: (options = {}) ->
-    @fetchCalled = true    
+    @fetchCalled = true
     @_connState("connected")
 
     optionsSuccess = options.success
@@ -18,17 +18,17 @@ class Bx.Collection.Base extends Backbone.Collection
     options.error = (collection, response) =>
       @_connState("error")
       optionsError(collection, response) if optionsError
-    
+
     super(options)
 
   fetchOnce: (options = {}) ->
     return if @fetchCalled
     @fetch(options)
-    
+
   _connState: (state = "") ->
     @_conn_state = state
-    @trigger("connection")    
-  
+    @trigger("connection")
+
   isConnected: ()->
     @_conn_state == "connected"
 
