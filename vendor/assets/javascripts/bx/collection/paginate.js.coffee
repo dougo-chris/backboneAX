@@ -25,13 +25,14 @@ class Bx.Collection.Paginate extends Bx.Collection.Base
     super(options)
 
 # RESTART THE SEARCH
-   restart: (options = {}) ->
-    options.add = false
+  restart: (options = {}) ->
+    options.reset = true
     @pageCurrent = 1
     @fetch(options)
 
 # PREV PAGE / NEXT PAGE
   prev: (options = {}) ->
+    options.reset = true
     if @pageCurrent > 0
       @pageCurrent--
       @fetch(options)
@@ -40,6 +41,7 @@ class Bx.Collection.Paginate extends Bx.Collection.Base
     @pageCurrent > 1
 
   next: (options = {}) ->
+    options.reset = true
     if @pageCurrent < @pageTotal
       @pageCurrent++
       @fetch(options)
@@ -49,7 +51,7 @@ class Bx.Collection.Paginate extends Bx.Collection.Base
 
 # MORE PAGE
   more: (options = {}) ->
-    options.add = true
+    options.reset = false
     if @pageCurrent < @pageTotal
       @pageCurrent++
       @fetch(options)
