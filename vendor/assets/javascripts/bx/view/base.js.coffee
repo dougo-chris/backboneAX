@@ -91,9 +91,9 @@ class Bx.View.Base extends Backbone.View
     fields = if $scope? then $("*[data-setter]", $scope) else @$("*[data-setter]")
     _.each fields, (field) =>
       $field = $(field)
-      setters= $field.attr("data-setter").split(";");
+      setters= $field.attr("data-setter").split(",");
       _.each setters, (setter) =>
-        setdata = setter.split(',')
+        setdata = setter.split(':')
         setdata.push("text") if (setdata.length == 1 )
         switch $.trim(setdata[1])
           when "id"
