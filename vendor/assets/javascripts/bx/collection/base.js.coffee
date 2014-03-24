@@ -7,27 +7,23 @@ class Bx.Collection.Base extends Backbone.Collection
 
   fetch: (options = {}) ->
     @fetchCalled = true
-    @_connState("connected")
+    @_conn_state = "connected"
 
     optionsSuccess = options.success
     options.success = (collection, response) =>
-      @_connState()
       optionsSuccess(collection, response) if optionsSuccess
+      @onSuccess(collection, response)
 
     optionsError = options.error
     options.error = (collection, response) =>
-      @_connState("error")
       optionsError(collection, response) if optionsError
+      @onError(collection, response)
 
     super(options)
 
   fetchOnce: (options = {}) ->
     return if @fetchCalled
     @fetch(options)
-
-  _connState: (state = "") ->
-    @_conn_state = state
-    @trigger("connection")
 
   isConnected: ()->
     @_conn_state == "connected"
@@ -37,3 +33,12 @@ class Bx.Collection.Base extends Backbone.Collection
 
   isFetched: ()->
     @fetchCalled && !@isConnected()
+
+  onSuccess: (collection, response) ->
+    @_conn_state = ""
+    @trigger("connection", @)
+
+  onError: (collection, response) ->
+    @_conn_state = "error"
+    @trigger("connection", @)
+

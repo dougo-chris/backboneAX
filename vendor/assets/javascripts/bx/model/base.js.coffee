@@ -5,57 +5,62 @@ class Bx.Model.Base extends Backbone.Model
     @constructed(attributes) if @constructed?
 
   fetch: (options = {}) ->
-    @_connState("connected")
+    @_conn_state = "connected"
 
     optionsSuccess = options.success
     options.success = (model, response) =>
-      @_connState()
       optionsSuccess(model, response) if optionsSuccess
+      @onSuccess(model, response)
 
     optionsError = options.error
     options.error = (model, response) =>
-      @_connState("error")
       optionsError(model, response) if optionsError
+      @onError(model, response)
 
     super(options)
 
   save: (attr, options = {}) ->
-    @_connState("connected")
+    @_conn_state = "connected"
 
     optionsSuccess = options.success
     options.success = (model, response) =>
-      @_connState()
       optionsSuccess(model, response) if optionsSuccess
+      @onSuccess(model, response)
 
     optionsError = options.error
     options.error = (model, response) =>
-      @_connState("error")
       optionsError(model, response) if optionsError
+      @onError(model, response)
 
     super(attr, options)
 
   destroy: (options = {}) ->
-    @_connState("connected")
+    @_conn_state = "connected"
 
     optionsSuccess = options.success
     options.success = (model, response) =>
-      @_connState()
       optionsSuccess(model, response) if optionsSuccess
+      @onSuccess(model, response)
 
     optionsError = options.error
     options.error = (model, response) =>
-      @_connState("error")
       optionsError(model, response) if optionsError
+      @onError(model, response)
 
     super(options)
-
-  _connState: (state = "") ->
-    @_conn_state = state
-    @trigger("connection", @)
 
   isError: ()->
     @_conn_state == "error"
 
   isConnected: () ->
     @_conn_state == "connected"
+
+
+  onSuccess: (collection, response) ->
+    @_conn_state = ""
+    @trigger("connection", @)
+
+  onError: (collection, response) ->
+    @_conn_state = "error"
+    @trigger("connection", @)
 

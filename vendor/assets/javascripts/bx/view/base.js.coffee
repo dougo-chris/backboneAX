@@ -15,11 +15,11 @@ class Bx.View.Base extends Backbone.View
     field = @$("##{fieldName}")
     value = if @_isModel(modelOrValue) then modelOrValue.get(attrName ? fieldName) else modelOrValue
 
-    field.attr('value', value)
+    field.val(value)
 
   formGetText: (fieldName, model, attrName) ->
     field = @$("##{fieldName}")
-    value =  field.attr('value')
+    value =  field.val()
 
     if model?
       options = {}
