@@ -31,8 +31,7 @@ class Bx.View.Base extends Backbone.View
     field = @$("##{fieldName}")
     value = if @_isModel(modelOrValue) then modelOrValue.get(attrName ? fieldName) else modelOrValue
 
-    field.find("option").removeAttr('selected')
-    field.find("option[value='#{value}']").attr('selected', true)
+    field.val(value)
 
   formGetSelect: (fieldName, model, attrName) ->
     field = @$("##{fieldName}")
