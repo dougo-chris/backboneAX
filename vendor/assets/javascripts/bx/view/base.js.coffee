@@ -153,7 +153,7 @@ class Bx.View.Base extends Backbone.View
     value = if @_isModel(modelOrValue) then modelOrValue.get(fieldName) else modelOrValue
     field = if $field? then $field else if $scope? then $("##{fieldName}", $scope) else @$("##{fieldName}")
 
-    match = if $field.attr("data-matcher") then "#{value}" == $field.attr("data-matcher") else value
+    match = if $field.attr("data-matcher")? then "#{value}" == $field.attr("data-matcher") else value
     field.toggle(match)
     if match
       field.removeClass('hide')
@@ -164,7 +164,7 @@ class Bx.View.Base extends Backbone.View
     value = if @_isModel(modelOrValue) then modelOrValue.get(fieldName) else modelOrValue
     field = if $field? then $field else if $scope? then $("##{fieldName}", $scope) else @$("##{fieldName}")
 
-    match = if $field.attr("data-matcher") then "#{value}" == $field.attr("data-matcher") else value
+    match = if $field.attr("data-matcher")? then "#{value}" == $field.attr("data-matcher") else value
     field.toggle(!match)
     if match
       field.addClass('hide')
