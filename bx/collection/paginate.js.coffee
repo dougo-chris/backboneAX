@@ -7,8 +7,9 @@ class Bx.Collection.Paginate extends Bx.Collection.Base
     @pageTotal = options.pageTotal ? 1
 
   parse: (response) ->
-    @pageCurrent = if response.pagination then response.pagination.current ? 1 else 1
-    @pageTotal = if response.pagination then response.pagination.total ? 1 else 1
+    @pageCurrent = if response.pagination then response.pagination.pageCurrent ? 1 else 1
+    @pageTotal = if response.pagination then response.pagination.pageTotal ? 1 else 1
+    @itemCount = if response.pagination then response.pagination.itemCount ? 0 else 0
     response.items || []
 
   fetch: (options = {}) ->
@@ -19,6 +20,11 @@ class Bx.Collection.Paginate extends Bx.Collection.Base
   restart: (options = {}) ->
     options.reset = true
     @pageCurrent = 1
+    @fetch(options)
+
+  goto: (page, options = {}) ->
+    options.reset = true
+    @pageCurrent = page
     @fetch(options)
 
 # PREV PAGE / NEXT PAGE

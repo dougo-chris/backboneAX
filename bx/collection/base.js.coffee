@@ -1,4 +1,5 @@
 class Bx.Collection.Base extends Backbone.Collection
+  model: Bx.Model.Base
 
   constructor: (models, options = {}) ->
     super(models, options)
@@ -8,6 +9,7 @@ class Bx.Collection.Base extends Backbone.Collection
   fetch: (options = {}) ->
     @fetchCalled = true
     @_conn_state = "connected"
+    @trigger('connection')
 
     optionsSuccess = options.success
     options.success = (collection, response) =>
@@ -37,6 +39,7 @@ class Bx.Collection.Base extends Backbone.Collection
   onSuccess: (collection, response) ->
     @_conn_state = ""
     @trigger("connection", @)
+    @trigger("empty", @) if collection.length == 0
 
   onError: (collection, response) ->
     @_conn_state = "error"
