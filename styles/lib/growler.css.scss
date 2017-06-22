@@ -1,0 +1,33 @@
+.growl-success, .growl-error, .growl-warning, .growl-notice, .growl-message {
+  min-height: 50px;
+  h1, h2 {
+	  color: #000;
+    text-align: left;
+    margin-top: 5px;
+    margin-bottom: 5px;
+  }
+  h1 {
+    font-size: 20px;
+    line-height: 22px;
+    padding: 5px 5px 5px 75px;
+  }
+  h2 {
+    font-size: 14px;
+    line-height: 16px;
+    color: #666;
+    padding: 0px 5px 5px 75px;
+  }
+}
+
+.growl-success {
+  background: image-url("core/growler/check48.png") no-repeat 5px 5px;
+}
+
+.growl-error {
+  background: image-url("core/growler/error48.png") no-repeat 5px 5px;
+}
+
+.growl-message, .growl-warning, .growl-notice {
+  background: image-url("core/growler/attention48.png") no-repeat 5px 5px;
+}
+
